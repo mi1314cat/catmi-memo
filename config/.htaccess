@@ -1,1 +1,8 @@
-
+# config 目录存放数据库真实配置，禁止一切 Web 访问（PHP include 不受影响）
+<IfModule mod_authz_core.c>
+  Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+  Order allow,deny
+  Deny from all
+</IfModule>
