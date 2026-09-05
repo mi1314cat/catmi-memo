@@ -1,0 +1,46 @@
+# ==== Catmi Memo 站点配置（Apache） ====
+# 本文件位于 htdocs，会覆盖/叠加主机根目录的默认 .htaccess
+
+# 关闭目录列表
+Options -Indexes
+
+# 默认字符集
+AddDefaultCharset UTF-8
+
+# webp 的正确 MIME
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+</IfModule>
+
+# 禁止直接访问敏感文件：数据库 SQL、配置、日志、备份等
+<FilesMatch "\.(sql|log|ini|env|bak|sh|md|netrc|lock|json)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# 双重保险：禁止直接访问数据库配置文件（config/config.php）
+<FilesMatch "^config\.php$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>
+
+# 禁止访问以点开头的隐藏文件（.gitignore 等；.ht* 由 Apache 内置保护）
+<FilesMatch "^\.">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+  <IfModule !mod_authz_core.c>
+    Order allow,deny
+    Deny from all
+  </IfModule>
+</FilesMatch>

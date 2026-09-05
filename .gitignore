@@ -1,0 +1,33 @@
+# ---- 真实配置（含数据库密码）—— 绝不提交 ----
+config/config.php
+config/installed.lock
+
+# ---- 运行时产生的用户内容（上传图片 / 附件 / 头像 / 背景图）----
+uploads/*
+!uploads/.gitkeep
+!uploads/.htaccess
+assets/bg/*
+!assets/bg/.gitkeep
+assets/avatars/*
+!assets/avatars/.gitkeep
+
+# ---- 环境与凭据 ----
+.env
+.env.*
+!.env.example
+ftp-creds
+.netrc
+*.netrc
+
+# ---- 日志 / 备份 / 临时文件 ----
+*.log
+*.bak
+*.backup
+*.old
+*.sql.gz
+*.zip
+
+# ---- 系统文件 ----
+.DS_Store
+Thumbs.db
+desktop.ini
