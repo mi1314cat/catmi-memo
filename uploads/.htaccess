@@ -1,0 +1,9 @@
+# uploads 目录不再直接对外提供文件，所有图片统一经 media.php 鉴权后输出
+# 这样私密动态的图片也无法通过猜测/持有 URL 直接访问
+<IfModule mod_authz_core.c>
+  Require all denied
+</IfModule>
+<IfModule !mod_authz_core.c>
+  Order allow,deny
+  Deny from all
+</IfModule>
